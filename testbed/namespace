@@ -1,0 +1,20 @@
+#!/bin/bash
+
+
+
+for i in {1..5};
+do
+       echo ip netns add ns_eth$i
+        ip netns add ns_eth$i
+        echo 
+
+       echo ip link set eth$i netns ns_eth$i
+        ip link set eth$i netns ns_eth$i
+
+       echo  ip netns exec ns_eth$i ip link set eth$i up
+        ip netns exec ns_eth$i ip link set eth$i up
+
+       echo ip netns exec ns_eth$i  dhclient eth$i
+       ip netns exec ns_eth$i  dhclient eth$i
+        ip netns exec ns_eth$i ifconfig lo 127.0.0.1 up
+done
